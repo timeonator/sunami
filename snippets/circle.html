@@ -1,0 +1,50 @@
+﻿<!DOCTYPE html>
+
+<html>
+	<head>
+		<title>Circle</title>
+		<meta charset="utf-8">
+
+		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+
+		<script type="text/javascript">
+            $(document).ready(canvasApp);
+
+            function canvasApp() {
+
+                function drawString() {
+                    context.fillStyle = '#EEEEEE';
+                    context.fillRect(0, 0, theCanvas.width, theCanvas.height);
+                    context.strokeStyle = '#000000';
+                    context.strokeRect(1, 1, theCanvas.width - 2, theCanvas.height - 2);
+
+                    ball.x = circle.centerX + Math.cos(circle.angle) * circle.radius;
+                    ball.y = circle.centerY + Math.sin(circle.angle) * circle.radius;
+
+                    circle.angle += ball.speed;
+
+                    context.fillStyle = '#000000';
+                    context.beginPath();
+                    context.arc(ball.x, ball.y, 5, 0, Math.PI * 2, true);
+                    context.closePath();
+                    context.fill();
+                }
+                // var radius = 2000;
+                var circle = { centerX: 250, centerY: 250, radius: 200, angle: 0 };
+                var ball = { x: 0, y: 0, speed: .1 };
+
+                theCanvas = document.getElementById("myCanvas");
+                context = theCanvas.getContext("2d");
+
+                setInterval(drawString, 20);
+            }
+
+		</script>
+	</head>
+
+	<body>
+		<canvas id="myCanvas" width="500" height="500">
+			<!-- Insert fallback content here -->
+		</canvas>
+	</body>
+</html>
